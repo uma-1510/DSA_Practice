@@ -1,1 +1,104 @@
+ #Array of Edges (Directed) [Start, End]
+ n = 8
+ A = [[0,1], [1,2], [0,3], [3,4], [3,6], [3,7], [4,2], [4,5], [5,2]]
+ 
+ Print(A)
+ 
+ #convert array of edges -> Adjancency matrix
+ 
+ M=[]
+ for i in range(n):
+     M.append([0]*n)
 
+#Implementing adjancency matrix
+#Representing the edge as 1
+for u,v in M:
+    M[u][v]=1
+    #If undirected then we specify the opposite direction
+    M[v][u]=1
+   
+ 
+#Implementing adjacency list
+from collections import defaultdict
+
+D= defaultdict(list)
+for u,v in A:
+    D[u].append(v)
+    #Indicates u->v
+    #D[v].append(u) -> if undirected
+print(D)
+#defaultdict(list, {0:[1,3], 1:[2], 3:[4,6,7], 4:[2,5], 5:[2]})
+
+
+#DFS with a recursion - O(V+E) where V is the number of nodes and E is the number if edges
+dfs_recursive(node):
+    print(node) #output the node
+    for neighbor in D[node]:
+        if neighbour not in seen:
+            seen.add(neighbour)
+            dfs_recursive(neighbour)
+    
+source = 0 #we strat at the soource
+seen=set() #to track the already seen vertices
+seen.add(source)
+dfs_recursive(source)
+
+#Iterative DFS with Stack - O(V+E)
+source=0
+seen=set()
+seen.add(source)
+stack=[source]
+
+while stack:
+    node = stack.pop()
+    print(node)
+    for nei in D[node]:
+        if nei not in seen:
+            seen.add(nei)
+            stack.append(nei)
+
+
+#BFS with Queue - O(V+E)
+source =0
+from collections import deque
+source=0
+seen=set()
+seen.add(source)
+q= deque()
+q.append(source)
+
+while q:
+    node = q.popleft()
+    print(node)
+    for nei in D[node]:
+        if nei not in seen:
+            seen.add(nei)
+            q.append(nei)
+            
+            
+#Implementing graph with class
+class Node:
+    def __init__(self, value):
+        self.value = value
+        self.neighbors = []
+        
+    def __str__(self):
+        return f'Node({self.value})'
+    
+    def display(self):
+        connections = [node.value for node in self.neighbors]
+        return f'{self.value} is connected to: {connections}'
+        
+A = Node('A')
+B= Node('B')
+C= Node('C')
+D= Node('D')
+
+A.neighbors.append(B)
+B.neighbors.append(A)
+C.neighbors.append(D)
+D.neighbors.append(C)
+
+
+
+    
