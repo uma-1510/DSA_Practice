@@ -1,4 +1,149 @@
- #Array of Edges (Directed) [Start, End]
+Interview Thinking Pattern 
+Convert input → Adjacency List
+Identify:
+traversal? → BFS / DFS
+shortest path? → BFS / Dijkstra
+ordering? → Topo sort
+grouping? → Union-Find
+Use visited set ALWAYS
+
+Final Mental Model
+DFS = explore deeply
+BFS = explore layer-wise
+Heap = optimize choice (min/max)
+Union-Find = grouping
+Topo Sort = ordering with dependencies
+
+What is a Graph?
+A graph is a collection of nodes (vertices) and edges (connections)
+Represent relationships between entities
+Can be:
+Directed (u → v)
+Undirected (u ↔ v)
+Weighted / Unweighted
+Cyclic / Acyclic (DAG)
+
+Graph Representations
+1. Adjacency Matrix
+2D matrix M[n][n]
+M[u][v] = 1 → edge exists
+
+Pros: O(1) edge lookup
+Cons: Takes more space
+Complexity:
+Space: O(V²)
+Edge check: O(1)
+Iterate neighbors: O(V)
+
+2. Adjacency List (Most used)
+dict/list → node : [neighbors]
+
+Pros:
+Space efficient
+Faster traversal
+Complexity:
+Space: O(V + E)
+Edge check: O(deg(V))
+Iterate neighbors: O(deg(V))
+
+Graph Traversals
+1. DFS (Depth First Search)
+Go deep first
+Recursive
+Uses call stack
+Iterative
+Uses explicit stack
+Complexity:
+Time: O(V + E)
+Space: O(V) (recursion/stack)
+
+2. BFS (Breadth First Search)
+Level-by-level traversal
+Uses queue
+Use case:
+Shortest path (unweighted graph)
+Complexity:
+Time: O(V + E)
+Space: O(V)
+
+Key Graph Algorithms
+1. Topological Sort (DAG only)
+Ordering of nodes such that u → v comes before v
+Approaches:
+BFS (Kahn’s Algorithm)
+DFS (postorder)
+
+Complexity:
+Time: O(V + E)
+Space: O(V)
+
+
+2. Shortest Path
+Unweighted Graph:
+BFS → O(V + E)
+
+Weighted Graph:
+Dijkstra (min heap)
+Time: O((V + E) log V)
+Space: O(V)
+
+With Negative Weights:
+Bellman-Ford
+Time: O(V * E)
+Space: O(V)
+
+
+3. Cycle Detection
+Directed Graph:
+DFS + recursion stack
+Undirected Graph:
+DFS + parent tracking
+
+Complexity:
+Time: O(V + E)
+Space: O(V)
+
+
+4. Minimum Spanning Tree (MST)
+Kruskal’s Algorithm:
+Uses Union-Find
+Time: O(E log E)
+
+Prim’s Algorithm:
+Uses min heap
+Time: O(E log V)
+
+
+5. Union-Find (Disjoint Set)
+Used for:
+Cycle detection
+Connected components
+Operations:
+Find: O(α(N)) (almost constant)
+Union: O(α(N))
+
+
+Common Patterns
+Visited / Seen set → avoid cycles
+Graph = Tree + cycles + multiple paths
+Always clarify:
+Directed vs Undirected
+Weighted vs Unweighted
+Connected vs Disconnected
+
+
+Applications of Graphs
+Social networks (friends, followers)
+Maps / GPS (shortest path)
+Task scheduling (topological sort)
+Network routing
+Dependency resolution (build systems)
+Recommendation systems
+Web crawling
+
+
+
+#Array of Edges (Directed) [Start, End]
  n = 8
  A = [[0,1], [1,2], [0,3], [3,4], [3,6], [3,7], [4,2], [4,5], [5,2]]
  
